@@ -2,16 +2,16 @@
 
 # Install Git and Node for each VM
 echo "Installing dependencies...";
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - &> /dev/null;
-sudo apt-get install -y nodejs &> /dev/null;
-sudo apt-get install -y git &> /dev/null;
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -;
+sudo apt-get install -y nodejs;
+sudo apt-get install -y git;
 echo "...Dependencies installed.";
 
-# Install Master Worker from GitHub for each worker
+# Install Master Worker from GitHub for each VM
 echo "Downloading Worker";
-git clone --quiet https://github.com/portsoc/clocoss-master-worker &> /dev/null;
+git clone https://github.com/portsoc/clocoss-master-worker;
 cd clocoss-master-worker;
-npm install --silent;
+npm install;
 echo "...Worker downloaded.";
 
 # Get server parameters
