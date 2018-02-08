@@ -33,7 +33,7 @@ echo "Creating $N VMs...";
 for i in `seq 1 $N`;
 do
         gcloud compute instances create "$workerName"-"$i" --preemptible \
-        --machine-type f1-micro \
+        --machine-type n1-standard-1 \
         --tags http-server,https-server \
         --metadata secret=$secretKey,ip=$serverIP \
         --metadata-from-file \
