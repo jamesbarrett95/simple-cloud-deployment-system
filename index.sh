@@ -28,6 +28,11 @@ gcloud config set compute/zone europe-west1-d;
 serverIP=`curl -s -H "Metadata-Flavor: Google" \
                 "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip"` \
 
+
+# Start Master Worker Server async
+echo "Starting server...";
+npm run server $secretKey &
+
 # Creating gcloud VMs
 echo "Creating $N VMs...";
 for i in `seq 1 $N`;
@@ -40,9 +45,8 @@ do
           startup-script=../startup-script.sh
 done;
 
-# Start Master Worker Server
-echo "Starting server...";
-npm run server $secretKey;
+# Wait for process to finish
+wait "$!"
 
 # Remove Master Worker Code
 echo "Removing server code...";
@@ -54,7 +58,7 @@ echo "Server removed!";
 echo "Killing workers...";
 for i in `seq 1 $N`;
 do
-        gcloud compute instances delete "$workerName"-"$i";
+        gcloud compute instances delete "$workerName"-"$i" --quiet;
 done;
 
 echo "Workers terminated";
