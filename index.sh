@@ -32,7 +32,7 @@ serverIP=`curl -s -H "Metadata-Flavor: Google" \
 echo "Creating $N VMs...";
 for i in `seq 1 $N`;
 do
-        gcloud compute instances create "$workerName"-"$i" \
+        gcloud compute instances create "$workerName"-"$i" --preemptible \
         --machine-type f1-micro \
         --tags http-server,https-server \
         --metadata secret=$secretKey,ip=$serverIP \
