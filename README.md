@@ -7,7 +7,7 @@ Given a runtime parameter N, this system automatically does the following:
 1. Generate a random shared secret string and stores it in ```secretKey```,
 2. Downloads and installs the server code (https://github.com/portsoc/clocoss-master-worker/), Node.js and Git.
 3. Starts the server with ```secretKey``` as a parameter,
-4. Creates N new gcloud VMs, providing to each the server's IP address and the ```secretKey```.
+4. Creates N new preemptible gcloud VM instances, providing to each the server's IP address and the ```secretKey```.
 5. Each of the N VMs does the following:
 	1. Downloads and installs the client software and its dependencies (Node.js and Git),
 	2. Runs the client with the server's IP address and the ```secretKey``` as parameters,
